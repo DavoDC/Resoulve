@@ -1,8 +1,8 @@
-package code.GameStates.Core;
+package code.GameStates.Menu;
 
 import code.Utility.BGBank;
-import code.Utility.ShapeManager;
-import java.util.ArrayList;
+import code.Utility.ButtonManager;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,9 +10,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.CombinedTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.state.transition.Transition;
@@ -21,7 +21,7 @@ import org.newdawn.slick.state.transition.Transition;
  *
  * @author David
  */
-public class MenuState extends BasicGameState
+public class MainMenu extends BasicGameState
 {
     // Background image
     private Image menuBg;
@@ -30,12 +30,9 @@ public class MenuState extends BasicGameState
     private Circle cursorCircle;
     private Image cursor;
     
-    // Buttons
-    private ArrayList<Rectangle> buttons;
-    private ArrayList<String> buttonNames;
-    
-    // Records whether menu has been drawn yet
-    private boolean drawn;
+    // Button Manager
+    private ButtonManager buttonMan;
+   
     
     /**
      * Used to identify states
@@ -43,7 +40,7 @@ public class MenuState extends BasicGameState
      * @return stateID
      */
     @Override
-    public int getID() { return 2; }
+    public int getID() { return 3; }
 
     
     
@@ -60,24 +57,31 @@ public class MenuState extends BasicGameState
        
        // Get random menu background and adjust
        menuBg = (new BGBank()).getRandomBG();
-          
-       // Initialise buttons
-       // Parameters = buttonNo, startXpos, startYpos, width, height, 
+       
+       // Initialise button manager
+       buttonMan = new ButtonManager();
+       
+       // Create specifications for buttons
        float[] parameters = {
-           3, //number of buttons
+           5, //number of buttons
            300, // start X pos
-           300, // start Y pos
-           300, // Width
+           200, // start Y pos
+           350, // Width
            50,  // Height
            0, //Xspace
-           80, //Yspace
+           60, //Yspace
            1 //colNo
            };
-       buttons = (new ShapeManager()).createRectangleGrid(parameters);
-       buttonNames = new ArrayList<>();
-       buttonNames.add("PLAY");
-       buttonNames.add("CREDITS");
-       buttonNames.add("EXIT");
+       
+       // Use specs to create buttons
+       buttonMan.createButtonGrid(parameters);
+       
+       // Add labels for buttons
+       buttonMan.addButtonLabel("PLAY");
+       buttonMan.addButtonLabel("HOW TO PLAY");
+       buttonMan.addButtonLabel("CREDITS");
+       buttonMan.addButtonLabel("ABOUT");
+       buttonMan.addButtonLabel("EXIT");
                
        // Initialise cursor follower
        cursorCircle = new Circle(0, 0, 10);
@@ -114,32 +118,52 @@ public class MenuState extends BasicGameState
        
        // Conditions/Events
        boolean mouseClicked = input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON);
-       boolean playClicked = cursorCircle.intersects(buttons.get(0));
-       boolean creditsClicked = cursorCircle.intersects(buttons.get(1));
-       boolean exitClicked = cursorCircle.intersects(buttons.get(2));
+       
+       // Check buttons 
+       int indexOfClicked = 0;
+       for (int i = 0; i < buttonMan.getButtoNo(); i++)
+       {
+           if (buttonMan.isTouching(i, cursorCircle))
+                   {
+                       indexOfClicked = i;
+                       break;
+                   }
+       }
       
        // Make transitions available
-       Transition leave = new FadeOutTransition();
-       Transition enter = new FadeInTransition();
+       Transition leaveF = new FadeOutTransition();
+       Transition enterF = new FadeInTransition();
+       Transition leaveC = new CombinedTransition();
+       Transition enterC = new CombinedTransition();
        
        // Check conditions
        if (mouseClicked)
        {
-           if (playClicked)
+           switch(indexOfClicked)
            {
-            game.enterState(3, leave, enter);  
-           }
-           else if(creditsClicked)
-           {
-            //game.enterState(?, leave, enter); 
-           }
-           else if(exitClicked)
-           {
-            System.exit(0);
-           }
+               // Clicked play
+               case 0: game.enterState(3, leaveC, enterC);
+               break;
+               
+               // Clicked on how to play
+               case 1: game.enterState(1, leaveC, enterC);  //TEMPORARY
+               break;
+               
+               // Clicked on credits
+               case 2: game.enterState(5, leaveC, enterC);  //TEMPORARY
+               break;
+               
+               // Clicked on about
+               case 3: game.enterState(1, leaveC, enterC);  //TEMPORARY
+               break;
+               
+               // Click on exit
+               case 4: System.exit(0);
+               break;
        }
        
     }
+}
     
     
     
@@ -158,44 +182,10 @@ public class MenuState extends BasicGameState
         
         // Draw background
         g.drawImage(menuBg, 0, 0);
-
-        //Draw buttons and add text overlay
-        for (int i = 0; i < buttons.size(); i++)
-        {
-            // Retrieve info
-            Rectangle curRect = buttons.get(i);
-            String curText = buttonNames.get(i);
-            
-            // Draw
-            g.setColor(Color.black);
-            g.draw(curRect);
-            g.fill(curRect);
-            
-            g.setColor(Color.white);
-            float X = curRect.getX() + 10;
-            float Y = curRect.getY() - 3;
         
-            try 
-            { 
-                code.Main.MainGame.getGameFont(60f).drawString(X, Y, curText); 
-            }
-            catch (Exception e) 
-            {
-                System.out.println("Issue with game font");
-            }
-        }
-     
+        // Draw buttons
+        buttonMan.drawButtonGrid(g, Color.black, Color.yellow);
+        
     }
-        
-
-    
-    
-    
-   
-    
-    
-    
-    
-   
-    
+  
 }

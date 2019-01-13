@@ -1,14 +1,10 @@
-package code.GameStates.Core;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package code.GameStates.Menu;
 
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -17,29 +13,26 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author David
  */
-public class PauseState extends BasicGameState
+public class GameOver extends BasicGameState
 {
-
     
+    
+    
+    @Override
     /**
      * Used to identify states
      * Used to switch to state
      */
-    @Override
-    public int getID() {
-        //id
-        return 4;
-    }
+    public int getID() { return 1; }
 
-    
+    @Override
      /**
      * This is only called when the game starts
      * Used to load resources
      * Used to initialise the game state.
      */
-    @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-       //tba
+       
     }
     
    
@@ -53,7 +46,17 @@ public class PauseState extends BasicGameState
      */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        g.drawString("PAUSED", 400, 300);
+       //ground tiles with dead sprite on top
+        
+        g.setColor(Color.white);
+        g.drawString("GAMEOVER", 300, 100);
+        
+         //g.drawString("Your progress was " + MainGame.mgProgress, 300, 200);
+        
+        g.drawString("CLICK TO RETRY", 300, 300);
+        
+       
+        
     }
 
     
@@ -66,9 +69,15 @@ public class PauseState extends BasicGameState
      * @throws org.newdawn.slick.SlickException
      */
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException 
-    {
-       //tbc
+    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+     
+        Boolean mouseClicked = container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON);
+       
+       if (mouseClicked)
+       {
+       game.enterState(3);
+       }
+       
     }
     
 }

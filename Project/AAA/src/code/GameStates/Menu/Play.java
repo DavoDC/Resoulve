@@ -1,4 +1,4 @@
-package code.GameStates.Core;
+package code.GameStates.Menu;
 
 import code.Entity.Camera;
 
@@ -19,11 +19,11 @@ import org.newdawn.slick.tiled.TiledMap;
  *
  * @author David
  */
-public class PlayState extends BasicGameState
+public class Play extends BasicGameState
 {
     //Screen dimensions
-    private final int screenW = code.Main.MainGame.screenW;
-    private final int screenH = code.Main.MainGame.screenH;
+    private final int screenW = code.GameStates.Main.MainGame.screenW;
+    private final int screenH = code.GameStates.Main.MainGame.screenH;
     
     //Map
     private TiledMap map;
@@ -42,7 +42,7 @@ public class PlayState extends BasicGameState
      * @return id
      */
     @Override
-    public int getID() { return 3; }
+    public int getID() { return 5; }
 
     
      /**
@@ -184,8 +184,8 @@ public class PlayState extends BasicGameState
          // Handle setting keys
          if (input.isKeyDown(Input.KEY_F) && input.isKeyDown(Input.KEY_LCONTROL))
          {
-             boolean newStatus = !code.Main.MainGame.agc.isFullscreen();
-             code.Main.MainGame.agc.setFullscreen(newStatus);
+             boolean newStatus = !code.GameStates.Main.MainGame.agc.isFullscreen();
+             code.GameStates.Main.MainGame.agc.setFullscreen(newStatus);
          }
          
          // Update camera

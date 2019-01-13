@@ -1,4 +1,4 @@
-package code.GameStates.MG;
+package code.GameStates.Minigame;
 
 
 
@@ -9,7 +9,7 @@ package code.GameStates.MG;
  */
 
 
-import code.Main.MainGame;
+import code.GameStates.Main.MainGame;
 import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

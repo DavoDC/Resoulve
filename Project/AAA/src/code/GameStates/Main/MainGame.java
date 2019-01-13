@@ -1,19 +1,17 @@
-package code.Main;
+package code.GameStates.Main;
 
-import code.GameStates.Core.*;
-import code.Utility.BGBank;
-
-import java.awt.Font;
-import java.io.InputStream;
+import code.GameStates.Menu.Pause;
+import code.GameStates.Menu.Play;
+import code.GameStates.Menu.GameOver;
+import code.GameStates.Menu.MainMenu;
+import code.GameStates.Menu.Intro;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.ResourceLoader;
 
 
 /**
@@ -31,8 +29,19 @@ public class MainGame extends StateBasedGame
     // Accessible AGC
     public static AppGameContainer agc;
     
-    //Acessible BGBank
-    public static BGBank bgb;
+    // StateIDs = Core
+    public static final int ABOUT = 1;
+    public static final int CREDITS = 2;
+    public static final int GAME_OVER = 3;
+    public static final int HELP = 3;
+    public static final int INTRO = 4;
+    public static final int MAIN_MENU = 5;
+    public static final int PAUSE = 6;
+    public static final int PLAY = 7;
+    public static final int SETTINGS = 8;
+    
+    // StateIDs = Minigames
+    
     
     
     /**
@@ -56,12 +65,11 @@ public class MainGame extends StateBasedGame
          agc.setAlwaysRender(true);
          agc.setClearEachFrame(false);
          agc.setShowFPS(true);
-
+         
          // Start AGC
          agc.start();
+       
          
-         //Initialise BGBank
-         bgb = new BGBank();
     }
 
     
@@ -73,7 +81,6 @@ public class MainGame extends StateBasedGame
     {
         super(title);
     }
-
  
     /**
      * Initialise states
@@ -85,24 +92,22 @@ public class MainGame extends StateBasedGame
     public void initStatesList(GameContainer gc) throws SlickException {
         
         // State 1 = Intro/Logo
-        this.addState(new IntroState());
+        this.addState(new Intro());
         
         // State 2 = Start Menu
-        this.addState(new MenuState());
+        this.addState(new MainMenu());
         
         //State 3 = Gameplay
-        this.addState(new PlayState());
+        this.addState(new Play());
         
         //State 4 = Paused Game
-        this.addState(new PauseState());
+        this.addState(new Pause());
         
         // State 5 = Game Over
-        this.addState(new GameOverState()); 
+        this.addState(new GameOver()); 
     }
     
-   
-    
-    
+  
      /**
      * Adjust an image for the system screen size
      * @param img
@@ -113,33 +118,7 @@ public class MainGame extends StateBasedGame
         return img.getScaledCopy(screenW , screenH);
     }
     
-    
-    
-    /**
-     * Get the game font, in the right format
-     * @param size Fontsize
-     * @return font as a TrueTypeFont
-     * @throws java.lang.Exception
-     */
-    public static TrueTypeFont getGameFont(float size) throws Exception
-    {
-        InputStream fontStream = ResourceLoader.getResourceAsStream("res/misc/3dventure.ttf"); 
-        Font awtFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-        awtFont = awtFont.deriveFont(size);
-        TrueTypeFont gamefont = new TrueTypeFont(awtFont, true);
 
-        return gamefont;
-    }
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
     
     
 

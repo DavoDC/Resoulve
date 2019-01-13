@@ -1,4 +1,4 @@
-package code.GameStates.Core;
+package code.GameStates.Menu;
 
 
 
@@ -17,7 +17,7 @@ import org.newdawn.slick.state.transition.Transition;
  *
  * @author David
  */
-public class IntroState extends BasicGameState
+public class Intro extends BasicGameState
 {
     // Background
     private Image introLogo;
@@ -36,7 +36,7 @@ public class IntroState extends BasicGameState
      * Used to switch to state
      */
     @Override
-    public int getID() { return 1; }
+    public int getID() { return 2; }
 
     
      /**
@@ -48,7 +48,7 @@ public class IntroState extends BasicGameState
     public void init(GameContainer container, StateBasedGame game) throws SlickException 
     {
        introLogo = new Image("res/misc/intro.png");
-       introLogo = code.Main.MainGame.adjustImage(introLogo);
+       introLogo = code.GameStates.Main.MainGame.adjustImage(introLogo);
        introTime = 3669;
        elapsedTime = 0;
        leave = new FadeOutTransition();
