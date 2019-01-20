@@ -1,4 +1,4 @@
-package code.Utility;
+package Utility;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;

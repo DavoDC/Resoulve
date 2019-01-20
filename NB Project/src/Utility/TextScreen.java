@@ -1,8 +1,13 @@
-package code.GameStates.Menu;
+package Utility;
 
-import code.Globals;
+
+import Main.Globals;
+import java.util.ArrayList;
+import org.newdawn.slick.Color;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -12,17 +17,21 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author David
  */
-public class Settings extends BasicGameState
+public abstract class TextScreen extends BasicGameState
 {
-
+    // Helps to display text
+    private TextScreenHelper textscreen;
     
-    /**
-     * Used to identify states
-     * Used to switch to state
-     * @return state ID
-     */
+    // Stores text
+    private ArrayList<String> text;
+    
+    // Background
+    private Image bg;
+    
+    
+
     @Override
-    public int getID() { return Globals.SETTINGS; }
+    public abstract int getID();
 
     
      /**
@@ -36,7 +45,14 @@ public class Settings extends BasicGameState
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException 
     {
-       //tba
+       // Initialise objects
+       textscreen = new TextScreenHelper();
+       text = new ArrayList<>();
+       
+       bg = (new BGBank()).getRandomBG();
+       
+       // Add text to Info Writer
+       textscreen.addText(initTextList());
     }
     
      /**
@@ -51,11 +67,13 @@ public class Settings extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException 
     {
-       Boolean mouseClicked = gc.getInput().isMouseButtonDown(Input.MOUSE_MIDDLE_BUTTON);
+       // Enter main menu when back pushed
+       Boolean escClicked = gc.getInput().isKeyDown(Input.KEY_ESCAPE);
+       Boolean middleClicked = gc.getInput().isMouseButtonDown(Input.MOUSE_MIDDLE_BUTTON);
        
-       if (mouseClicked)
+       if (escClicked || middleClicked)
        {
-       game.enterState(Globals.MAIN_MENU);
+       game.enterState(Globals.states.get("MAINMENU"));
        }
        
     }
@@ -72,9 +90,25 @@ public class Settings extends BasicGameState
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException 
     {
-        g.drawString("SETTINGS", 400, 300);
+        // Draw bg
+        bg.draw(0, 0, Color.darkGray);
+        
+        // Draw text on top
+        textscreen.writeParagraph(g);
+        
+        // Reveal back button at top left
+        g.setColor(Color.white);
+        g.drawString("BACK = MIDMOUSE/ESC", 10, 35);
     }
-
+    
+    
+    
+    /**
+     * Input text here
+     * First entry is the header
+     * @return 
+     */
+    public abstract ArrayList<String> initTextList();
     
     
     

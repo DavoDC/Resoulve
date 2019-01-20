@@ -1,4 +1,4 @@
-package code.Entity;
+package Entity;
 
 import java.util.ArrayList;
 import org.newdawn.slick.Animation;

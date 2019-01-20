@@ -1,7 +1,8 @@
-package code.GameStates.Menu;
+package GameStates.Core;
 
-import code.Globals;
-import code.Utility.FontBank;
+
+import Main.Globals;
+import Utility.FontBank;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -18,7 +19,7 @@ import org.newdawn.slick.state.transition.Transition;
  *
  * @author David
  */
-public class Intro extends BasicGameState
+public class Loading extends BasicGameState
 {
     // Background
     private Image introLogo;
@@ -37,7 +38,7 @@ public class Intro extends BasicGameState
      * Used to switch to state
      */
     @Override
-    public int getID() { return Globals.INTRO; }
+    public int getID() { return Globals.LOADING_ID; }
 
     
      /**
@@ -75,21 +76,35 @@ public class Intro extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException 
     {
        // Add all states
+       // Note: Loading state already added
+        
+       Globals.states.put("ABOUT", 1);
        sbg.addState(new About());
+      
+       Globals.states.put("CONTROLS", 2);
        sbg.addState(new Controls());
+       
+       Globals.states.put("CREDITS", 3);
        sbg.addState(new Credits());
+       
+       Globals.states.put("GAMEOVER", 4);
        sbg.addState(new GameOver());
-       // Skip intro because already added
+      
+       Globals.states.put("MAINMENU", 6);
        sbg.addState(new MainMenu());
-       sbg.addState(new Pause());
+       
+       Globals.states.put("PLAY", 7);
        sbg.addState(new Play());
+       
+       Globals.states.put("SETTINGS", 8);
        sbg.addState(new Settings());
+       
 
        // Initialise resources
        sbg.init(gc);
 
        // Enter main menu
-       sbg.enterState(Globals.MAIN_MENU, leave , enter); 
+       sbg.enterState(Globals.states.get("MAINMENU"), leave , enter); 
     }
    
     /**
@@ -106,7 +121,7 @@ public class Intro extends BasicGameState
         // Draw intro/logo background
         g.drawImage(introLogo, 0, 0);
         
-        // Write "loading"
+        // Write loading line
         int Xpos = (Globals.screenW/2)-150;
         int Ypos = Globals.screenH - 100;
         font.drawString(Xpos, Ypos, "LOADING");

@@ -1,4 +1,4 @@
-package code.Utility;
+package Utility;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
