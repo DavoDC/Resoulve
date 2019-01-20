@@ -1,7 +1,7 @@
-package code.GameStates.Menu;
+package GameStates.Core;
 
 
-import code.Globals;
+import Main.Globals;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -24,7 +24,7 @@ public class GameOver extends BasicGameState
      * Used to identify states
      * Used to switch to state
      */
-    public int getID() { return Globals.GAME_OVER; }
+    public int getID() { return Globals.states.get("GAMEOVER"); }
 
     @Override
      /**
@@ -45,14 +45,18 @@ public class GameOver extends BasicGameState
      * @throws org.newdawn.slick.SlickException
      */
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
      
-       Boolean mouseClicked = container.getInput().isMouseButtonDown(Input.MOUSE_MIDDLE_BUTTON);
+        // Enter main menu when back pushed
+       Boolean escClicked = gc.getInput().isKeyDown(Input.KEY_ESCAPE);
+       Boolean middleClicked = gc.getInput().isMouseButtonDown(Input.MOUSE_MIDDLE_BUTTON);
        
-       if (mouseClicked)
+       if (escClicked || middleClicked)
        {
-       game.enterState(Globals.MAIN_MENU);
+       game.enterState(Globals.states.get("MAINMENU"));
        }
+       
+       
        
     }
     
@@ -69,12 +73,15 @@ public class GameOver extends BasicGameState
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
        
-        //grey version of alien
+        // Grey version of alien
         
+        // State tag
         g.setColor(Color.white);
         g.drawString("GAMEOVER", 300, 100);
        
-        
+        // Reveal back button at top left
+        g.setColor(Color.white);
+        g.drawString("BACK = MIDMOUSE/ESC", 10, 35);
     }
 
     

@@ -1,4 +1,4 @@
-package code.Entity;
+package Entity;
 
 
 import org.newdawn.slick.GameContainer;

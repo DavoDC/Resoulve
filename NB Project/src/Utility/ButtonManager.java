@@ -1,5 +1,5 @@
 
-package code.Utility;
+package Utility;
 
 
 import java.util.ArrayList;
