@@ -1,6 +1,6 @@
-package code.Utility;
+package Utility;
 
-import code.Globals;
+import Main.Globals;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,7 +1,7 @@
-package code.GameStates.Menu;
+package GameStates.Core;
 
-import code.Globals;
-import code.Utility.TextScreen;
+import Main.Globals;
+import Utility.TextScreen;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +16,7 @@ public class Credits extends TextScreen
      * Override ID
      */
     @Override
-    public int getID() { return Globals.CREDITS; }
+    public int getID() { return Globals.states.get("CREDITS"); }
 
 
     /**
@@ -24,7 +24,7 @@ public class Credits extends TextScreen
      * @return 
      */
     @Override
-    public ArrayList<String> getTextList()
+    public ArrayList<String> initTextList()
     {
        //Create AL
        ArrayList<String> text = new ArrayList<>();
@@ -41,11 +41,6 @@ public class Credits extends TextScreen
        text.add("Clint Bellanger (Gold Item Sprites)");
        text.add("Aaron D. Chand (Special pixelated font)");
        text.add("Tuomo Untinen (Sailing Ship Sprites)");
-       text.add("    ");
-       text.add("    ");
-       text.add("    ");
-       text.add("    ");
-       text.add("Use middle mouse button to go back");
        
        return text;
     }

@@ -1,7 +1,7 @@
-package code.GameStates.Menu;
+package GameStates.Core;
 
-import code.Globals;
-import code.Utility.TextScreen;
+import Main.Globals;
+import Utility.TextScreen;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class Controls extends TextScreen
      * Override ID
      */
     @Override
-    public int getID() { return Globals.CONTROLS; }
+    public int getID() { return Globals.states.get("CONTROLS"); }
 
 
     /**
@@ -24,7 +24,7 @@ public class Controls extends TextScreen
      * @return 
      */
     @Override
-    public ArrayList<String> getTextList()
+    public ArrayList<String> initTextList()
     {
        //Create AL
        ArrayList<String> text = new ArrayList<>();
@@ -32,14 +32,11 @@ public class Controls extends TextScreen
        // Add to text
        text.add("CONTROLS");
        text.add("MOVEMENT = Arrow Keys");
-       text.add("PAUSE = Escape ");
-       text.add("BACK = Middle Mouse");
+       text.add("BACK = Escape/Middle Mouse");
        text.add("    ");
        
        return text;
     }
-    
-
 
     
     

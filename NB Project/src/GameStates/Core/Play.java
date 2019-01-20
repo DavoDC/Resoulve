@@ -1,8 +1,8 @@
-package code.GameStates.Menu;
+package GameStates.Core;
 
-import code.Entity.Camera;
-import code.Entity.Player;
-import code.Globals;
+import Entity.Camera;
+import Entity.Player;
+import Main.Globals;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -34,7 +34,7 @@ public class Play extends BasicGameState
      * @return id
      */
     @Override
-    public int getID() { return Globals.PLAY; }
+    public int getID() { return Globals.states.get("PLAY"); }
 
     
      /**
@@ -163,9 +163,10 @@ public class Play extends BasicGameState
          
          
          // Pause key
-         if (input.isKeyDown(Input.KEY_ESCAPE))
+         if (input.isKeyPressed(Input.KEY_ESCAPE))
          {
-             game.enterState(Globals.PAUSE);
+             game.enterState(Globals.states.get("MAINMENU"));
+             Globals.isPaused = true;
          }
         
         
