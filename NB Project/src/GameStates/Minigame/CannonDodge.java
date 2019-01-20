@@ -1,3 +1,5 @@
+package GameStates.Minigame;
+
 //package code.GameStates.Minigame;
 //
 //

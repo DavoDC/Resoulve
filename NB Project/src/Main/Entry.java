@@ -1,16 +1,17 @@
-package code;
+package Main;
 
-import code.GameStates.Menu.Intro;
+import GameStates.Core.Loading;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class MainGame extends StateBasedGame 
+public class Entry extends StateBasedGame 
 {
 
     
-	public MainGame() 
+	public Entry() 
         {
 		super("Alien Aztec Adventure");
 	}
@@ -21,7 +22,7 @@ public class MainGame extends StateBasedGame
             try 
             {
                 // Create agc
-                Globals.agc = new AppGameContainer(new MainGame());
+                Globals.agc = new AppGameContainer(new Entry());
 
                 // Adjust AGC
                 Globals.screenW = Globals.agc.getScreenWidth();
@@ -34,9 +35,9 @@ public class MainGame extends StateBasedGame
                 Globals.agc.start();
 
             }
-            catch(SlickException se) 
+            catch(Exception e) 
             {
-                se.printStackTrace();
+                e.printStackTrace();
             }
 	}
         
@@ -45,7 +46,7 @@ public class MainGame extends StateBasedGame
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException 
         {
-		addState(new Intro());
+		addState(new Loading());
 	}
        
         

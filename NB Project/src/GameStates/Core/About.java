@@ -1,7 +1,7 @@
-package code.GameStates.Menu;
+package GameStates.Core;
 
-import code.Globals;
-import code.Utility.TextScreen;
+import Main.Globals;
+import Utility.TextScreen;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +15,7 @@ public class About extends TextScreen
      * Override ID
      */
     @Override
-    public int getID() { return Globals.ABOUT; }
+    public int getID() { return Globals.states.get("ABOUT"); }
 
 
     /**
@@ -23,7 +23,7 @@ public class About extends TextScreen
      * @return 
      */
     @Override
-    public ArrayList<String> getTextList()
+    public ArrayList<String> initTextList()
     {
        //Create AL
        ArrayList<String> text = new ArrayList<>();
