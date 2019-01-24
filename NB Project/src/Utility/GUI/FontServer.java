@@ -1,4 +1,4 @@
-package Utility;
+package Utility.GUI;
 
 import java.awt.Font;
 import java.io.InputStream;
@@ -47,6 +47,9 @@ public class FontServer
         String fontS = parts[0];
         int styleID = interpretStyle(parts[1]);
         float size = Float.parseFloat(parts[2]);
+        
+        // Font sizes above 60 cannot be displayed
+        if (size > 60) { size = 60; }
                 
         // Initialise font output
         TrueTypeFont fontOutput = null;

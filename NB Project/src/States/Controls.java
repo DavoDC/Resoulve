@@ -1,7 +1,7 @@
-package GameStates.Core;
+package States;
 
 import Main.Globals;
-import Utility.InfoScreen;
+import Utility.GUI.InfoScreen;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class Controls extends InfoScreen
        // Add to text
        text.add("CONTROLS");
        text.add("MOVEMENT = Arrow Keys");
-       text.add("BACK = Escape/Middle Mouse");
+       text.add("BACK = Escape");
        text.add("    ");
        
        return text;

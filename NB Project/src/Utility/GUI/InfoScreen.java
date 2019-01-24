@@ -1,4 +1,4 @@
-package Utility;
+package Utility.GUI;
 
 import Main.Globals;
 import static Main.Globals.screenW;
@@ -11,8 +11,14 @@ import org.newdawn.slick.Color;
  */
 public abstract class InfoScreen extends InterfaceScreen
 {
-    // Get needed info
-    private static final int startX = (Globals.screenW/4) - 200;
+    // Adjust X positions of text
+    public static final int headerX = (Globals.screenW/2) - 175;
+    public static final int lineX = (Globals.screenW/4) - 200;
+    
+    
+    // Fonts
+    public static final String headerFont = "Gamefont-Plain-65";
+    public static final String lineFont = "Segoe UI-Plain-35";
     
     @Override
     public abstract int getID();
@@ -20,7 +26,7 @@ public abstract class InfoScreen extends InterfaceScreen
     @Override
     public ButtonManager initButtonManager() 
     {
-        return new ButtonManager("Gamefont-Plain-65", "Segoe UI-Plain-35");
+        return new ButtonManager( headerFont, lineFont );
     }
 
     @Override
@@ -28,7 +34,7 @@ public abstract class InfoScreen extends InterfaceScreen
     { 
         // Initialise header parameters
         // Order = startXpos, startYpos, width, height
-        float[] hParams = new float[] {startX, 100f, screenW, 50f};
+        float[] hParams = new float[] {headerX, 100f, screenW, 50f};
         
         return hParams;
     }
@@ -38,7 +44,7 @@ public abstract class InfoScreen extends InterfaceScreen
     {
         // Initalise paragraph parameters
         // Order = startXpos, startYpos, width, height, Xspace, Yspace, colNo
-        float[] lParams = new float[] {startX, 160f, screenW, 40f, 15f, 0f, 1f};
+        float[] lParams = new float[] {lineX, 160f, screenW, 40f, 15f, 0f, 1f};
         
         return lParams;
     }

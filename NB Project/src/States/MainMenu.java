@@ -1,13 +1,20 @@
-package GameStates.Core;
+package States;
 
 import Main.Globals;
-import Utility.ButtonManager;
-import Utility.InterfaceScreen;
+import Utility.GUI.ButtonManager;
+import Utility.GUI.FontServer;
+import Utility.GUI.InfoScreen;
+import Utility.GUI.InterfaceScreen;
+import Utility.TimedWriter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.state.StateBasedGame;
+
 
 /**
  *
@@ -15,6 +22,19 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class MainMenu extends InterfaceScreen
 {
+    // Helps to write AAA slowly
+    private TimedWriter tw;
+    
+    // Font
+    private TrueTypeFont font;
+    
+    
+    @Override
+    public void customInit()
+    {
+        tw = new TimedWriter("Alien Aztec Adventure", 150);
+        font = FontServer.getFont("gamefont-plain-70");
+    }
     
     @Override
     public int getID() 
@@ -25,7 +45,7 @@ public class MainMenu extends InterfaceScreen
     @Override
     public ButtonManager initButtonManager() 
     {
-        String gfs = "gamefont-plain-70";
+        String gfs = "gamefont-plain-50";
         return new ButtonManager(gfs, gfs);
     }
     
@@ -50,9 +70,9 @@ public class MainMenu extends InterfaceScreen
            new float[] 
            {
            300, // start X pos
-           100, // start Y pos
-           370, // Width
-           60,  // Height
+           250, // start Y pos
+           300, // Width
+           40,  // Height
            };
     }
 
@@ -66,7 +86,7 @@ public class MainMenu extends InterfaceScreen
         float[] last = new float[] 
            {
            0, //Xspace
-           Globals.screenH/16, //Yspace //dynamic to fit on screen
+           Globals.screenH/17, //Yspace //dynamic to fit on screen
            1 //colNo
            };
         
@@ -91,29 +111,36 @@ public class MainMenu extends InterfaceScreen
 
             int pos = Globals.states.get("PLAY");
             Globals.states.put("CONTINUE", pos);
+          
         }
-    
+        
+        //Update timewriter
+        tw.update();
+        
     }
 
     @Override
     public void clickAction(StateBasedGame sbg, String label) 
     {
-        // Close game if "EXIT" pressed
-        if (label.contains("EXIT")) 
-        { 
-            Globals.agc.exit(); 
-        }
-        else 
-        {
-            // Figure out next state ID
-            int newStateID = Globals.states.get(label);
+        // Figure out next state ID
+        int newStateID = Globals.states.get(label);
 
-            // Transition to that state
-            sbg.enterState(newStateID, Globals.leave, Globals.enter); 
-        }
-        
-        
+        // Transition to that state
+        sbg.enterState(
+                newStateID, 
+                Globals.getLeave(),
+                Globals.getEnter()
+        );    
     }
+    
+
+    @Override
+    public void customPostRender(Graphics g)
+    {
+        g.setColor(Color.white);
+        font.drawString(200, 50, tw.getText() );
+    }
+   
     
     @Override
     public boolean isDarkened() 

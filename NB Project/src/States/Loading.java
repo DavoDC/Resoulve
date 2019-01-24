@@ -1,8 +1,9 @@
-package GameStates.Core;
+package States;
 
 
 import Main.Globals;
-import Utility.FontServer;
+import Utility.GUI.FontServer;
+import org.newdawn.slick.Color;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,6 +12,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.*;
 
 /**
  *
@@ -23,13 +25,17 @@ public class Loading extends BasicGameState
     
     // Font
     private TrueTypeFont font;
+    
+    // Time
+    long startRef = Globals.agc.getTime();
+    long introTime = 3669;
    
     /**
      * Used to identify states
      * Used to switch to state
      */
     @Override
-    public int getID() { return Globals.LOADING_ID; }
+    public int getID() { return 0; }
 
     
      /**
@@ -38,7 +44,7 @@ public class Loading extends BasicGameState
      * Used to initialise the game state.
      */
     @Override
-    public void init(GameContainer container, StateBasedGame game) throws SlickException 
+    public void init(GameContainer gc, StateBasedGame game) throws SlickException 
     {
         try 
         {
@@ -52,6 +58,7 @@ public class Loading extends BasicGameState
         } 
         catch (Exception ex) 
         {
+            System.err.println("Loading init issue");
         } 
            
     }
@@ -70,35 +77,50 @@ public class Loading extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException 
     {
        // Add all states
-       // Note: Loading state already added
+       // Loading state is state 0
+       // IDs are determined automatically
         
-       Globals.states.put("ABOUT", 1);
+       Globals.states.put("ABOUT", Globals.states.size() + 1);
        sbg.addState(new About());
       
-       Globals.states.put("CONTROLS", 2);
+       Globals.states.put("CONTROLS", Globals.states.size() + 1);
        sbg.addState(new Controls());
        
-       Globals.states.put("CREDITS", 3);
+       Globals.states.put("CREDITS", Globals.states.size() + 1);
        sbg.addState(new Credits());
        
-       Globals.states.put("GAMEOVER", 4);
+       Globals.states.put("EXIT", Globals.states.size() + 1);
+       sbg.addState(new Exit());
+       
+       Globals.states.put("GAMEOVER", Globals.states.size() + 1);
        sbg.addState(new GameOver());
-      
-       Globals.states.put("MAINMENU", 6);
+       
+       // LOADING already in
+       
+       Globals.states.put("MAINMENU", Globals.states.size() + 1);
        sbg.addState(new MainMenu());
        
-       Globals.states.put("PLAY", 7);
+       Globals.states.put("PLAY", Globals.states.size() + 1);
        sbg.addState(new Play());
        
-       Globals.states.put("SETTINGS", 8);
+       Globals.states.put("SETTINGS", Globals.states.size() + 1);
        sbg.addState(new Settings());
        
-
        // Initialise resources
        sbg.init(gc);
+       
+       // Wait to ensure loading screen is displayed 
+       if (Globals.agc.getTime() > startRef + introTime)
+       {
+           // Enter main menu
+           sbg.enterState(
+                   Globals.states.get("MAINMENU"), 
+                   new FadeOutTransition(Color.black, 2000),  //leave
+                   new FadeInTransition(Color.black, 10) //enter
+           );
+       }
 
-       // Enter main menu
-       sbg.enterState(Globals.states.get("MAINMENU"), Globals.leave , Globals.enter); 
+        
     }
    
     /**

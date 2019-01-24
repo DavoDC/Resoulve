@@ -1,4 +1,4 @@
-package Utility;
+package Utility.GUI;
 
 import Main.Globals;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+
 /**
  *
  * @author CHARKEYD
@@ -27,7 +28,7 @@ public abstract class InterfaceScreen extends BasicGameState
     private float[] lParams;
     private ArrayList<String> bLabels;
     
-    // Cursor circle
+    // Cursor
     private Circle cursorCircle;
     
     // Background
@@ -35,6 +36,9 @@ public abstract class InterfaceScreen extends BasicGameState
     
     // Font
     private TrueTypeFont font;
+    
+    // States where you can't go back
+    private ArrayList<Integer> specialStates;
     
     
     @Override
@@ -86,10 +90,16 @@ public abstract class InterfaceScreen extends BasicGameState
            Globals.cursor = new Image("res/misc/cursor.png");
            Globals.cursor = Globals.cursor.getScaledCopy(0.75f);
        }
-       gc.setMouseCursor(Globals.cursor,0,0); 
+       gc.setMouseCursor(Globals.cursor,0,0);
        
        // Initialise font
        font = FontServer.getFont("Segoe UI-Italic-22");
+       
+       // States where you can't go back
+       specialStates = new ArrayList<>();
+       specialStates.add(Globals.states.get("MAINMENU"));
+       specialStates.add(Globals.states.get("EXIT"));
+       specialStates.add(Globals.states.get("GAMEOVER"));
        
        customInit();
     }
@@ -168,7 +178,12 @@ public abstract class InterfaceScreen extends BasicGameState
            int menuID = Globals.states.get("MAINMENU");
            if (curID != menuID)
            {
-               sbg.enterState(menuID);
+                           // Transition to that state
+            sbg.enterState(
+                    menuID, 
+                    Globals.getLeave(),
+                    Globals.getEnter()
+            );
            }
            
        }
@@ -198,15 +213,16 @@ public abstract class InterfaceScreen extends BasicGameState
         // Draw buttons
         buttonMan.drawButtonGrid(g, getButtonCol());
         
-        // If not on MainMenu, reveal back button at top left
-        if (game.getCurrentStateID() != Globals.states.get("MAINMENU"))
+        // On certain states, reveal back button 
+        int curStateID = game.getCurrentStateID(); 
+        if ( !specialStates.contains(curStateID) )
         {
             g.setColor(Color.white);
             font.drawString(10, Globals.screenH-40, "Press ESC or Right Click to go back");
         }
         
         
-        customPostRender();
+        customPostRender(g);
     }
     
     /**
@@ -222,7 +238,7 @@ public abstract class InterfaceScreen extends BasicGameState
     /**
      * Do custom post rendering here
      */
-    public void customPostRender()
+    public void customPostRender(Graphics g)
     {
     }
    

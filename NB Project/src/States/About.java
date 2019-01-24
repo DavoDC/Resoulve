@@ -1,7 +1,7 @@
-package GameStates.Core;
+package States;
 
 import Main.Globals;
-import Utility.InfoScreen;
+import Utility.GUI.InfoScreen;
 import java.util.ArrayList;
 
 /**
