@@ -1,4 +1,4 @@
-package GameStates.Core;
+package States;
 
 import Entity.Camera;
 import Entity.Player;
@@ -68,7 +68,7 @@ public class Play extends BasicGameState
      * @throws org.newdawn.slick.SlickException
      */
     @Override
-    public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 
         //Make animation use game time
         alien.updateAnimation(delta);
@@ -76,6 +76,7 @@ public class Play extends BasicGameState
         //Relative speed
         float relSpeed = delta * alien.getMovSpeed();
         
+        // FActor out to a method
         //Get input
         Input input = gc.getInput();
 
@@ -84,19 +85,12 @@ public class Play extends BasicGameState
             {
               // Change animation
               alien.startAnim("up");
-
-              // Check for blocked tiles
-              //boolean cond1 = coll.canPass(playerX + 63, playerY - relSpeed);
-             // boolean cond2 = coll.canPass(playerX + 1, playerY - relSpeed); //add camY factor
               
-              // Check for edge of map
-             // boolean cond3 = coll.canPass(playerX + 1, playerY - 50 - relSpeed); 
-             
               // Move if conditions are satisfied
-              //if (cond1 && cond2 && cond3)
-             // {
+              //if (map.upAllowed())
+              // {
                   playerY -= relSpeed;
-             // }
+              // }
               
             } 
         else if(input.isKeyDown(Input.KEY_DOWN)) //Down arrow
@@ -104,35 +98,20 @@ public class Play extends BasicGameState
               // Change animation
               alien.startAnim("down");
 
-              // Check for blocked tiles
-             // boolean cond1 = coll.canPass(playerX + 63, playerY + 64 + relSpeed);
-              //boolean cond2 = coll.canPass(playerX + 1, playerY + 64 + relSpeed);
-              
-              // Check for edge of map
-             // boolean cond3 = playerY < (cam.getMapH()-70)-cam.getCamY() ;
-              
               // Move if conditions are satisfied
-            //  if (cond1 && cond2 && cond3)
-            //  {
+              //if (map.downAllowed())
+              // {
                   playerY += relSpeed;
-            //  }
-              
-
+              // }
+             
             }
         else if(input.isKeyDown(Input.KEY_LEFT)) //Left arrow
             {
               // Change animation
               alien.startAnim("left");
               
-              // Check for blocked tiles
-              //boolean cond1 = coll.canPass(playerX - relSpeed, playerY + 1);
-             // boolean cond2 = coll.canPass(playerX - relSpeed, playerY + 63);
-              
-              // Check for edge of map
-             // boolean cond3 = coll.canPass(playerX - 60 - relSpeed, playerY + 63);
-              
               // Move if conditions are satisfied
-              //if (cond1 && cond2 && cond3)
+              //if (map.leftAllowed())
               //{
                   playerX -= relSpeed;
              // }
@@ -143,15 +122,8 @@ public class Play extends BasicGameState
               // Change animation
               alien.startAnim("right");
               
-              // Check for blocked tiles
-             // boolean cond1 = coll.canPass(playerX + 50 + relSpeed, playerY + 63);
-              //boolean cond2 = coll.canPass(playerX + 50 + relSpeed, playerY + 1);
-              
-              // Check for edge of map
-              //boolean cond3 = playerX < (cam.getMapW()-40)-cam.getCamX(); 
-              
               // Move if conditions are satisfied
-              //if (cond1 && cond2 && cond3)
+              //if (map.rightAllowed())
               //{
                  playerX += relSpeed;
               //}
@@ -166,11 +138,26 @@ public class Play extends BasicGameState
          // Pause key
          if (input.isKeyPressed(Input.KEY_ESCAPE))
          {
-             game.enterState(Globals.states.get("MAINMENU"));
+             sbg.enterState(
+                 Globals.states.get("MAINMENU"),
+                 Globals.getLeave(),
+                 Globals.getEnter()
+             );
              Globals.isPaused = true;
          }
         
         
+         //testing
+         if (input.isKeyDown(Input.KEY_T))
+         {
+             sbg.enterState(
+                 Globals.states.get("GAMEOVER"),
+                 Globals.getLeave(),
+                 Globals.getEnter()
+             );
+         }
+         
+         
          // Handle setting keys
          if (input.isKeyDown(Input.KEY_F) && input.isKeyDown(Input.KEY_LCONTROL))
          {
@@ -204,6 +191,7 @@ public class Play extends BasicGameState
         alien.drawPlayer(playerX, playerY);
         
         //Top left info
+        // facout out to draw settings
         int infoX = playerX - 50;
         int infoY = playerY - 50;
         

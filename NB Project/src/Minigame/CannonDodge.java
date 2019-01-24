@@ -1,4 +1,4 @@
-package GameStates.Minigame;
+package Minigame;
 
 //package code.GameStates.Minigame;
 //

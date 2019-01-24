@@ -1,4 +1,4 @@
-package Utility;
+package Utility.GUI;
 
 
 import java.util.ArrayList;
@@ -172,7 +172,7 @@ public class ButtonManager
      */
     public String getLabelClicked(Circle cursor)
     {
-        String label = null;
+        String label = "";
         for (int i = 0; i < labels.size(); i++)
         {
            Rectangle curButton = rectangles.get(i);
