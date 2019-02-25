@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\NB Project\dist\SlickGame.jar</jar>
-  <outfile>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\Executable\Deployable\SlickGame.exe</outfile>
+  <outfile>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\Deployment\Deployable\SlickGame.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>./required</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\Executable\Config\icon.ico</icon>
+  <icon>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\Deployment\L4J Files\icon.ico</icon>
   <singleInstance>
     <mutexName>SlickGame</mutexName>
     <windowTitle>SlickGame</windowTitle>
@@ -45,4 +45,11 @@
     <trademarks></trademarks>
     <language>ENGLISH_US</language>
   </versionInfo>
+  <messages>
+    <startupErr>An error occurred while starting the application.</startupErr>
+    <bundledJreErr>This application was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted.</bundledJreErr>
+    <jreVersionErr>This application requires Java (JRE)</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
+    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
+  </messages>
 </launch4jConfig>
