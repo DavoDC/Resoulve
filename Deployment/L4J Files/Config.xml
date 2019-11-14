@@ -2,10 +2,10 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\NB Project\dist\SlickGame.jar</jar>
-  <outfile>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\Deployment\Deployable\SlickGame.exe</outfile>
+  <jar>C:\Users\David\Actual Documents\Programming Projects\NetBeans Projects\Elusio\NB Project\dist\Elusio.jar</jar>
+  <outfile>C:\Users\David\Actual Documents\Programming Projects\NetBeans Projects\Elusio\Deployment\Deployable\Elusio.exe</outfile>
   <errTitle></errTitle>
-  <cmdLine></cmdLine>
+  <cmdLine>Desktop</cmdLine>
   <chdir>./required</chdir>
   <priority>normal</priority>
   <downloadUrl>http://java.com/download</downloadUrl>
@@ -13,10 +13,10 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\charkeyd\Documents\Programming Projects\NetBeans Projects\Slick2D Game\Deployment\L4J Files\icon.ico</icon>
+  <icon>C:\Users\David\Actual Documents\Programming Projects\NetBeans Projects\Elusio\Deployment\L4J Files\Icon.ico</icon>
   <singleInstance>
-    <mutexName>SlickGame</mutexName>
-    <windowTitle>SlickGame</windowTitle>
+    <mutexName>Elusio</mutexName>
+    <windowTitle>Elusio</windowTitle>
   </singleInstance>
   <classPath>
     <mainClass>main.Entry</mainClass>
