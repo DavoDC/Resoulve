@@ -1,4 +1,4 @@
-package challenge;
+package states.challenges;
 
 import java.util.ArrayList;
 

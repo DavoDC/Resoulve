@@ -1,6 +1,6 @@
-package challenge;
+package states.challenges;
 
-import components.screentemps.InfoScreen;
+import states.screens.InfoScreen;
 import main.Globals;
 
 import java.util.ArrayList;

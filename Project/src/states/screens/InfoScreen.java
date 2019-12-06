@@ -1,4 +1,4 @@
-package components.screentemps;
+package states.screens;
 
 import java.util.ArrayList;
 
