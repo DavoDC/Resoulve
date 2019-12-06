@@ -3,6 +3,7 @@ package components.popups;
 import java.util.ArrayList;
 
 import main.Globals;
+import org.newdawn.slick.Color;
 
 import org.newdawn.slick.Graphics;
 
@@ -11,7 +12,7 @@ import org.newdawn.slick.Graphics;
  *
  * @author David
  */
-public class PopupStore {
+public class PopupDisplayer {
 
     // Special popup variables
     private Popup curPopup;
@@ -20,7 +21,7 @@ public class PopupStore {
     /**
      * Create a popup displayer
      */
-    public PopupStore() {
+    public PopupDisplayer() {
 
         // Initialize with intro popup
         curPopup = getIntroPopup();
@@ -44,6 +45,7 @@ public class PopupStore {
         feats.add(2);  // Height as number of tiles 
         feats.add(20); // Interval for delay writer
         feats.add("default"); // FontS or "default"
+        feats.add(Color.black); // Text color
 
         // Text
         ArrayList<String> textLines = new ArrayList<>();

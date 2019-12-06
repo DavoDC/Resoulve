@@ -1,4 +1,4 @@
-package components.screentemps;
+package states.screens;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -144,22 +144,31 @@ public abstract class InterfaceScreen extends BasicGameState {
         boolean riClick = input.isMouseButtonDown(Input.MOUSE_RIGHT_BUTTON);
         if (escPress || riClick) {
 
-            // Get current state ID and main menu ID
+            // Get current state ID and back state ID
             int curID = sbg.getCurrentStateID();
-            int menuID = Globals.STATES.get("MAINMENU");
+            int backID = Globals.STATES.get(getBackState());
 
-            // If not currently in main menu
-            if (curID != menuID) {
+            // If not currently in back state
+            if (curID != backID) {
 
-                // Transition to main menu
+                // Transition to back state
                 sbg.enterState(
-                        menuID,
+                        backID,
                         Globals.getLeave(),
                         Globals.getEnter()
                 );
             }
 
         }
+    }
+
+    /**
+     * Get the name of the state to go back to
+     *
+     * @return
+     */
+    public String getBackState() {
+        return "MAINMENU";
     }
 
     /**
