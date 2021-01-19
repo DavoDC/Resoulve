@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\David\GitHub Repos\Elusio\Project\dist\Elusio.jar</jar>
-  <outfile>C:\Users\David\GitHub Repos\Elusio\Deployment\Deployable\Elusio.exe</outfile>
+  <jar>C:\Users\David\GitHub Repos\Resoulve\Project\dist\Resoulve.jar</jar>
+  <outfile>C:\Users\David\GitHub Repos\Resoulve\Deployment\Deployable\Resoulve.exe</outfile>
   <errTitle></errTitle>
   <cmdLine>Exe</cmdLine>
   <chdir>./components/libs</chdir>
@@ -13,10 +13,10 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\David\GitHub Repos\Elusio\Deployment\Launch4J Config\EIcon.ico</icon>
+  <icon>C:\Users\David\GitHub Repos\Resoulve\Deployment\Launch4J Config\ResoulveIcon.ico</icon>
   <singleInstance>
-    <mutexName>Elusio</mutexName>
-    <windowTitle>Elusio</windowTitle>
+    <mutexName>Resoulve</mutexName>
+    <windowTitle>Resoulve</windowTitle>
   </singleInstance>
   <classPath>
     <mainClass>base.Entry</mainClass>
