@@ -1,7 +1,0 @@
-For claude: 
-Improve preformance iissues
-
-Transition to better frameowkr???
-
-
-Improve deployment, make standalone exe so users can run without having to inbstall anything 

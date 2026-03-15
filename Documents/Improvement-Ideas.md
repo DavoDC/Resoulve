@@ -4,6 +4,14 @@
 
 ---
 
+## Technical Improvements (from TODO.txt)
+
+- Improve performance issues
+- Improve deployment: make standalone EXE so users can run without installing Java (use launch4j to bundle JRE)
+- Transition to better framework? (Slick2D is dead — LWJGL 3 + LibGDX are modern alternatives)
+
+---
+
 ## Gameplay Ideas
 
 ### Map & Movement
