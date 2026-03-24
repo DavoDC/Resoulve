@@ -1,5 +1,9 @@
 # Resoulve
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G31WKOCN)
+
+
+
 A 2D Java action-adventure game built with the Slick2D framework. Explore realms, collect items, fight enemies, and take on challenges.
 
 ## [Screenshots](https://github.com/DavoDC/Resoulve/wiki/Screenshots) · [Wiki](https://github.com/DavoDC/Resoulve/wiki)
