@@ -5,8 +5,11 @@
 Start here, then read (all in this repo):
 - `Documents/IDEAS.md` - David's own design notes: boss mechanics, item list, gameplay ideas. Source of truth for lore/mechanics below.
 - `Documents/Claude-Feedback.md` - an honest prior assessment of the original Java build (why it never released, what would matter most).
+- `Documents/fable-reborn/market-research.md` - genre research (the "friendslop" co-op design pattern - Lethal Company, Peak, etc.) that shaped the design language below, even though this build is single-player. Read it for the *why* behind diegetic UI, discovery-based items, and modular boss-threat design.
 - `Project/src/` - the original Java/Slick2D implementation. Read it as a **mechanics reference** (how combat, inventory, states, particles work), not as code to port line-by-line - you're rebuilding in a different stack.
 - `ExtraResources/` - **real, existing sprite art** for enemies, items, cannon, and effect beams (510 files). This is not a from-scratch art job - see Asset Strategy below.
+
+**Single-player this round, but architect for co-op later - do not build multiplayer.** David's original instinct was "could this be multiplayer, friends solving puzzles and fighting bosses together" - the design research (see market-research.md) confirms Resoulve's lore/mechanics are a genuinely strong fit for that. But real networked multiplayer needs a server, room codes, and state sync - a much bigger, riskier build than a one-shot should gamble on, and hosting cost/complexity for a free hobby project is still an open question. **Decision: build single-player now, but keep the boss encounter's sub-systems modular** (minion waves, push-back zone, health-drain-from-trees as separate, independently-triggered systems rather than one tangled Trevil update loop) so that a future co-op mode could assign different systems to different players without a rewrite. Don't build any networking code, don't add multiplayer UI/menus this round - just don't paint yourself into a single-hardcoded-player-object corner where splitting responsibilities later would require re-architecting everything. Document the multiplayer idea as a far-future item in this project's own `IDEAS.md`/`HISTORY.md` once you create them (see Documentation section near the end) - it's a real idea, just not this round's bet.
 
 **Window:** Fable 5 promotional access ends 2026-07-07 11:59:59 PM PT. Weekly Fable usage is healthy (not a scarcity situation) - this is a deliberate second major push alongside the AudioManager GUI work, not a replacement for it.
 
@@ -63,6 +66,15 @@ This is the single most important constraint. The original game's problem was ne
 - **A simple win/lose state** - defeating Trevil ends the slice with a clear "you win" screen; running out of health restarts the encounter. No need for a full game-over/menu system beyond this.
 - **Runs from a single HTML file, opens directly in a browser, no install, no build step required to play it.**
 
+### Design language: friendslop-inspired, even though this build is solo
+
+The genre research in `market-research.md` (Lethal Company, Peak, and the broader "friendslop" pattern) isn't just about co-op - several of its principles make a *solo* game feel more alive too, and are cheap to apply here:
+
+- **Diegetic UI over menu overlays.** The magic gate (spellbook + crystal) is a natural moment for this - the player character physically interacts with the gate (walks up, an in-world animation plays, the gate visibly responds) rather than a popup menu saying "Use Spellbook?". Apply the same instinct to the inventory if practical - an in-world satchel/pouch the character visibly opens, not a detached UI panel floating over the game.
+- **Discovery over tutorial.** No tutorial popups explaining what items do. Let the player find out the flower heals by using it, find out the spellbook's role by trying it at the gate. A brief in-world flavor text (a sign, a note from the guide figure) is fine; a mechanics tutorial screen is not.
+- **Items with real tradeoffs, not pure upgrades** - matches Resoulve's own existing design (the stimulant item in `IDEAS.md` already damages health as a tradeoff for speed). Keep that spirit for whatever items you include - a cost attached to the benefit, not a free power-up.
+- **Modular boss threats** (see Trevil below) - independent systems the player must juggle simultaneously, not one linear damage-sponge fight.
+
 ### OUT of scope (explicitly - do not build these this round)
 
 - Multiplayer, accounts, persistence/save system - single-player, single-session only.
@@ -95,6 +107,8 @@ This is the single most important constraint. The original game's problem was ne
 
 This is a genuinely interesting boss (health-drain-from-environment mechanic, advancing minion waves, a limited-use crowd-control special) - there's real design substance here worth doing justice to, not just re-skinning a generic top-down shooter enemy.
 
+**Architecture note (forward-looking, not multiplayer this round):** implement the three Trevil sub-mechanics - health-drain-from-trees, minion wave advance, root push-back - as three independent systems/classes with their own update logic and state, coordinated by (not tangled into) a top-level encounter controller. This is purely a solo-player fight this round - the reason for the separation is that if co-op is ever added later, each system is a natural candidate for "assign this threat to a player" without requiring a rewrite. Don't build anything multiplayer-specific (no networking, no second-player input handling) - just don't hardcode the assumption that one player must handle all three simultaneously in a way that's structurally hard to split later.
+
 ---
 
 ## Definition of done
@@ -114,3 +128,8 @@ You have explicit license to push polish once the slice above is solid: screen s
 ## Document as you go
 
 If you make a real design call not already decided here (e.g. how Trevil's health-drain actually triggers, exact tile layout of the realm), write it into `Documents/HISTORY.md` (create if it doesn't exist) the same way AudioManager's Fable session documented its own decisions - so this is traceable later, not lost.
+
+**Create a proper far-future ideas doc for this build too** (`Documents/HISTORY.md` for decisions made, and add a "Far Future" section - either in that file or a new `Documents/fable-reborn/IDEAS.md`, your call on which fits better once you see how much you've written). Seed it with:
+- **Multiplayer/co-op** - the real idea behind this build's modular boss-threat architecture. Note explicitly that it's contingent on resolving hosting cost/complexity for a free hobby project (unresolved as of this session - modern low-cost options like a free-tier WebSocket relay or peer-to-peer WebRTC may make this easier than it sounds, but that needs its own research pass before committing).
+- The other 4 crystals, realms, and bosses (Mycovolence, Viridash, Ship) cut from this round's scope.
+- Anything else you consciously deferred while building.
