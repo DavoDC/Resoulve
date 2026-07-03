@@ -4,9 +4,9 @@
 
 ---
 
-## FABLE - ResoulveReborn brief ready (2026-07-03)
+## ResoulveReborn - browser rebuild in progress (new repo)
 
-A scoped, Fable-ready brief for a **browser-native vertical-slice rebuild** (Phaser 3/JS, one realm, the Trevil boss fight, real assets from `ExtraResources/` as the foundation) lives at `Documents/fable-reborn/fable-brief.md`. This is a deliberate exception to David's usual "avoid JS" preference for home projects - approved specifically because zero-install browser play is the whole point (see brief for reasoning). Read the brief before touching anything below - the boss mechanics and item list in this file are its lore source, not a build order for the old Java codebase.
+A browser-native vertical-slice rebuild (Phaser 3/JS, one realm, the Trevil boss fight, real assets from `ExtraResources/` as the foundation) is being built in a **new sibling repo**, `C:\Users\David\GitHubRepos\ResoulveReborn` - wrong platform to build inside this repo (Java/Slick2D), so it's a fresh repo that references this one for lore/mechanics/assets, not a fork. Brief: `ResoulveReborn/docs/fable-brief.md`. This repo (`Resoulve`) stays read-only reference material for that build - the boss mechanics and item list in this file are its lore source, not a build order for this Java codebase.
 
 ---
 
