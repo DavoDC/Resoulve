@@ -4,6 +4,12 @@
 
 ---
 
+## FABLE - ResoulveReborn brief ready (2026-07-03)
+
+A scoped, Fable-ready brief for a **browser-native vertical-slice rebuild** (Phaser 3/JS, one realm, the Trevil boss fight, real assets from `ExtraResources/` as the foundation) lives at `Documents/fable-reborn/fable-brief.md`. This is a deliberate exception to David's usual "avoid JS" preference for home projects - approved specifically because zero-install browser play is the whole point (see brief for reasoning). Read the brief before touching anything below - the boss mechanics and item list in this file are its lore source, not a build order for the old Java codebase.
+
+---
+
 ## Priority Order (strategic)
 
 1. **Boss battles** - makes the game actually complete (see Boss Battles section below)
