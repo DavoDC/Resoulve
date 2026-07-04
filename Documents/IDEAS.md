@@ -6,7 +6,11 @@
 
 ## ResoulveReborn - browser rebuild in progress (new repo)
 
-A browser-native vertical-slice rebuild (Phaser 3/JS, one realm, the Trevil boss fight, real assets from `ExtraResources/` as the foundation) is being built in a **new sibling repo**, `C:\Users\David\GitHubRepos\ResoulveReborn` - wrong platform to build inside this repo (Java/Slick2D), so it's a fresh repo that references this one for lore/mechanics/assets, not a fork. Brief: `ResoulveReborn/docs/fable-brief.md`. This repo (`Resoulve`) stays read-only reference material for that build - the boss mechanics and item list in this file are its lore source, not a build order for this Java codebase.
+A browser-native vertical-slice rebuild (Phaser 3/JS, one realm, the Trevil boss fight, real assets from `ExtraResources/` as the foundation) is being built in a **new sibling repo**, `C:\Users\David\GitHubRepos\ResoulveReborn` - wrong platform to build inside this repo (Java/Slick2D), so it's a fresh repo that references this one for lore/mechanics/assets, not a fork. Brief: `ResoulveReborn/docs/fable-brief.md`. A second sibling, `ResoulveReborn3D`, is a 3D Three.js rebuild of the same world/lore - also done. This repo (`Resoulve`) stays read-only reference material for both builds - the boss mechanics and item list in this file are its lore source, not a build order for this Java codebase.
+
+## If a "for real" full Resoulve is ever built (future, not scoped, not urgent)
+
+David's own words (2026-07-04): "I want to include spiritual themes and my spiritual beliefs, that's where AAA and Resoulve came from - they are an allegory for starseeds, alien souls in human bodies, or just aliens. I really like those themes." Real worldbuilding intent worth preserving for whenever a serious/full version of this game is developed - not scope for the current bounded Fable slices (2D or 3D), which are deliberately small vertical slices, not the full narrative vision.
 
 ---
 
