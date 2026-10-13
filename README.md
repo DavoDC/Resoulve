@@ -8,6 +8,10 @@ A 2D Java action-adventure game built with the Slick2D framework. Explore realms
 
 ## [Screenshots](https://github.com/DavoDC/Resoulve/wiki/Screenshots) · [Wiki](https://github.com/DavoDC/Resoulve/wiki)
 
+## Playing the Game
+
+See [How To Play](https://github.com/DavoDC/Resoulve/wiki/How-To-Play) in the wiki.
+
 ## Features
 
 - **Exploration** - navigate rooms and realms with a top-down camera
@@ -17,14 +21,6 @@ A 2D Java action-adventure game built with the Slick2D framework. Explore realms
 - **Particle effects** - configurable particle system
 - **Audio** - background music and sound effects via AudioServer
 - Smooth state transitions (fade in/out)
-
-## Controls
-
-See [Key Mappings](https://github.com/DavoDC/Resoulve/wiki) in the wiki.
-
-## Running
-
-Run the executable from `Deployment/`. Requires Java.
 
 ## Tech
 
